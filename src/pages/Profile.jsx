@@ -27,6 +27,7 @@ const Profile = () => {
     const stored = localStorage.getItem('favorites');
     return stored ? JSON.parse(stored) : [];
   });
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [favoriteDogs, setFavoriteDogs] = useState([]);
   const [mostLikedBreed, setMostLikedBreed] = useState(null);
 
@@ -58,22 +59,36 @@ const Profile = () => {
 
   return (
     <div className="profile-wrapper">
-      <div className="profile-card horizontal">
-        <img src={generateAvatarUrl(name)} alt="Avatar" className="small-avatar" />
-        <div className="profile-info">
-          <h2>{name || 'Dog Lover'}</h2>
-          <p>{email}</p>
+      <div className="header">
+        <h1> 🐾 Every DOG deserves LOVE</h1>
+        <div className="top-actions">
+          <button onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}>
+            {showFavoritesOnly ? 'Hide Favorites' : 'Show Favorites'}
+          </button>
+          <button onClick={handleClearFavorites}>🗑 Clear Favorites</button>
+          <button onClick={handleLogout}>🚪 Logout</button>
+          <div className="heart-badge">❤️ {favorites.length}</div>
         </div>
       </div>
 
-      {mostLikedBreed && (
+      {!showFavoritesOnly && (
+        <div className="profile-card horizontal">
+          <img src={generateAvatarUrl(name)} alt="Avatar" className="small-avatar" />
+          <div className="profile-info">
+            <h2>{name || 'Dog Lover'}</h2>
+            <p>{email}</p>
+          </div>
+        </div>
+      )}
+
+      {!showFavoritesOnly && mostLikedBreed && (
         <div className="metrics-box">
           <p>💡 <strong>The breed you like the most:</strong> {mostLikedBreed}</p>
         </div>
       )}
 
       <div className="favorites-section">
-        <h3>Your Favorite Dogs 🐾</h3>
+        {!showFavoritesOnly && <h3>Your Favorite Dogs 🐾</h3>}
         {favoriteDogs.length === 0 ? (
           <p className="empty-state">You haven’t favorited any dogs yet.</p>
         ) : (
@@ -91,10 +106,10 @@ const Profile = () => {
         )}
       </div>
 
-      <div className="profile-buttons">
-        <button onClick={handleClearFavorites}>🗑 Clear Favorites</button>
-        <button onClick={() => navigate('/search')}>🔍 Back to Search</button>
-        <button onClick={handleLogout}>🚪 Logout</button>
+      <div className="match-box">
+        <button className="back-button" onClick={() => navigate('/search')}>
+           Back to Search
+        </button>
       </div>
     </div>
   );

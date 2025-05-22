@@ -18,8 +18,10 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between; 
     animation: fadeInPage 0.4s ease-out;
   }
+  
   
   /* Page Fade In */
   @keyframes fadeInPage {
@@ -118,6 +120,39 @@
   .clear-filters-btn:hover {
     background-color: #ef4444;
   }
+  .filter-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .clear-filters-btn,
+  .match-btn {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .clear-filters-btn {
+    background-color: #f87171;
+    color: white;
+  }
+  
+  .clear-filters-btn:hover {
+    background-color: #dc2626;
+  }
+  
+  .match-btn {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .match-btn:hover {
+    background-color: #1d4ed8;
+  }
+  
   
   /* Active Filter Tags */
   .active-filters {
@@ -253,14 +288,16 @@
   
   /* Match Button */
   .match-box {
-    margin-top: 2rem;
+    margin-top: auto; 
+    padding-top: 1rem; 
     text-align: center;
   }
+  
   
   .match-box button {
     padding: 0.8rem 1.6rem;
     font-size: 1rem;
-    background-color: #3b82f6;
+    background-color: #2563eb;
     color: white;
     border: none;
     border-radius: 8px;
@@ -269,7 +306,8 @@
   }
   
   .match-box button:disabled {
-    background-color: #93c5fd;
+    background-color: #2563eb;
     cursor: not-allowed;
   }
+  
   

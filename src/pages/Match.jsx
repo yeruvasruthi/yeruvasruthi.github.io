@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
@@ -32,8 +32,7 @@ const Match = () => {
         const matchId = res.data.match;
         const { data } = await api.post('/dogs', [matchId]);
         setMatchDog(data[0]);
-
-        toast.success('You  a match made in bark-heaven!', { toastId: 'You  a match made in bark-heaven', autoClose: 900 });
+        toast.success('You found a match made in bark-heaven!', { toastId: 'match-success', autoClose: 900 });
       } catch (err) {
         console.error('Error fetching matched dog:', err);
         toast.error('Failed to load match. Try again.');
@@ -79,12 +78,13 @@ const Match = () => {
       )}
 
       <div className="header">
-        <h1> 🐾 Lil' Buddy can't wait to shower you with some extra love!</h1>
+        <h1> 🐾 Every DOG deserves LOVE</h1>
         <div className="top-actions">
           <button onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}>
             {showFavoritesOnly ? 'Hide Favorites' : 'Show Favorites'}
           </button>
           <button onClick={handleClearFavorites}>Clear Favorites</button>
+          <Link to="/profile"><button>👤 Profile</button></Link>
           <button onClick={handleLogout}>🚪 Logout</button>
           <div className="heart-badge">❤️ {favorites.length}</div>
         </div>
@@ -122,7 +122,7 @@ const Match = () => {
 
       <div className="match-box">
         <button className="back-button" onClick={() => navigate('/search')}>
-           Back to Search
+          Back to Search
         </button>
       </div>
     </div>

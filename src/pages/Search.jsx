@@ -26,16 +26,15 @@ const Search = () => {
 
   const navigate = useNavigate();
   const size = 20;
+
   useEffect(() => {
     localStorage.setItem('from', from);
   }, [from]);
+
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // optional: animated scroll
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [from]);
-    
+
   useEffect(() => {
     api.get('/dogs/breeds')
       .then(res => setBreeds(res.data))
@@ -48,6 +47,11 @@ const Search = () => {
   useEffect(() => localStorage.setItem('zipCode', zipCode), [zipCode]);
 
   useEffect(() => {
+    if (ageMin && ageMax && Number(ageMax) < Number(ageMin)) {
+      toast.error('Max Age cannot be less than Min Age', { autoClose: 1200 });
+      return;
+    }
+
     const fetchDogs = async () => {
       try {
         const res = await api.get('/dogs/search', {
@@ -67,15 +71,12 @@ const Search = () => {
         console.error('Search error', err);
       }
     };
-    if (!showFavoritesOnly) {
-      fetchDogs();
-    }
+
+    if (!showFavoritesOnly) fetchDogs();
   }, [selectedBreed, sortOrder, ageMin, ageMax, zipCode, from, showFavoritesOnly]);
 
   useEffect(() => {
-    if (showFavoritesOnly) {
-      setDogIds(favorites);
-    }
+    if (showFavoritesOnly) setDogIds(favorites);
   }, [showFavoritesOnly, favorites]);
 
   useEffect(() => {
@@ -138,7 +139,7 @@ const Search = () => {
   return (
     <div className="search-wrapper">
       <div className="header">
-        <h1>🐶 Every DOG deserves LOVE</h1>
+        <h1>🐾 Every DOG deserves LOVE</h1>
         <div className="top-actions">
           <button onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}>
             {showFavoritesOnly ? 'Show All Dogs' : 'Show Favorites Only'}
@@ -189,9 +190,18 @@ const Search = () => {
           className="filter-input"
         />
 
-        <button className="clear-filters-btn" onClick={handleClearFilters}>
-          ✖ Clear Filters
-        </button>
+        <div className="filter-buttons">
+          <button className="clear-filters-btn" onClick={handleClearFilters}>
+            ✖ Clear Filters
+          </button>
+          <button
+            className="match-btn"
+            onClick={handleMatch}
+            disabled={!favorites.length}
+            title={!favorites.length ? 'Please select at least one dog to match' : ''}>
+            🎯 Find My Match
+          </button>
+        </div>
       </div>
 
       <div className="active-filters">
