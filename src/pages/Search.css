@@ -1,0 +1,275 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html, #root {
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9fafb;
+  }
+  
+  .search-wrapper {
+    width: 100%;
+    padding: 2rem 4%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    animation: fadeInPage 0.4s ease-out;
+  }
+  
+  /* Page Fade In */
+  @keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 1rem;
+  }
+  
+  .header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+  }
+  
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .top-actions button {
+    padding: 0.55rem 1rem;
+    font-size: 0.9rem;
+    border: none;
+    background-color: #f1f5f9;
+    color: #1f2937;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .top-actions button:hover {
+    background-color: #e2e8f0;
+  }
+  
+  .heart-badge {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Filters */
+  .filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  
+  .filters select,
+  .filter-input {
+    padding: 0.6rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    width: 160px;
+    text-align: center;
+  }
+  
+  .clear-filters-btn {
+    background-color: #f87171;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    height: 42px;
+    margin-top: auto;
+    align-self: center;
+  }
+  
+  .clear-filters-btn:hover {
+    background-color: #ef4444;
+  }
+  
+  /* Active Filter Tags */
+  .active-filters {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+  }
+  
+  .filter-tag {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid #bae6fd;
+  }
+  
+  /* Dog Card Grid */
+  .dog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  /* Dog Card Style */
+  .dog-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+    max-width: 340px;
+    margin: auto;
+    text-align: center;
+    opacity: 0;
+    animation: fadeInCard 0.3s ease forwards;
+  }
+  
+  @keyframes fadeInCard {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .dog-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .dog-card img {
+    display: block;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center center;
+    background-color: #f3f4f6;
+    aspect-ratio: 4 / 3;
+  }
+  
+  
+  .dog-card:hover img {
+    transform: scale(1.05);
+  }
+  
+  .dog-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 0.75rem;
+    color: #1f2937;
+  }
+  
+  .dog-card p {
+    font-size: 0.95rem;
+    color: #475569;
+    margin: 0.2rem 0;
+  }
+  
+  .dog-card strong {
+    color: #0f172a;
+  }
+  
+  /* Favorite Button + Animation */
+  .fav {
+    margin: 1rem auto 1.5rem;
+    padding: 0.45rem 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background-color: #f1f5f9;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .fav.active {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    animation: pop 0.3s ease;
+  }
+  
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .pagination button {
+    padding: 0.5rem 1rem;
+    background-color: #e5e7eb;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Match Button */
+  .match-box {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .match-box button {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .match-box button:disabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+  }
+  
