@@ -71,3 +71,14 @@ Source code is available at:
    ```bash
    git clone https://github.com/yeruvasruthi/yeruvasruthi.github.io.git
    cd yeruvasruthi.github.io
+
+API Integration
+
+This app communicates with the Fetch-provided backend service at https://frontend-take-home-service.fetch.com. Key API endpoints used include:
+
+POST /auth/login – user login
+GET /dogs/breeds – retrieve list of breeds for filtering
+GET /dogs/search – search for dogs based on breed and other criteria
+POST /dogs – fetch detailed dog data by IDs
+POST /dogs/match – generate a match from favorite dogs
+All API requests include credentials: 'include' to ensure cookies are sent with requests.
